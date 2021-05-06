@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Middleware\AuthAdmin;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,3 +16,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/user/dashboard', function () {
+    return view('user.dashboard');
+})->middleware(['auth'])->name('user.dashboard');
+
+Route::get('/admin/dashboard', function () {
+    return view('admin.dashboard');
+})->middleware(['auth', 'authadmin'])->name('admin.dashboard');
+
+
+require __DIR__.'/auth.php';
